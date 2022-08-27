@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Travals.Models.CityModel>
+
+@{
+    ViewBag.Title = "City";
+}
+
+<h2>City</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Add")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.City_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.City_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City_Name)
+        </td>
+        <td>
+            @{
+                String img64 = Convert.ToBase64String(item.Image);
+                String img64Url = string.Format("data:image/" + item.Type + ";base64,{0}", img64);
+                <img src="@img64Url" alt="Forest" style="height:50px;width:50px;border-radius:10px;">
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.City_ID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Travals.Models.CityModel>
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<div class="main">
+    <div class="shop_top">
+        <div class="container">
+            <div class="row ex_box">
+                <h3 class="m_2">Cities</h3>
+
+                @foreach (var item in Model)
+                {
+                    String img64 = Convert.ToBase64String(item.Image);
+                    String img64Url = string.Format("data:image/" + item.Type + ";base64,{0}", img64);
+
+                    <div class="col-md-4 team1">
+                        <div class="img_section magnifier2">
+                            <a class="fancybox" href="@Url.Action("Category","Home", new {ID=item.City_ID})">
+                                <img src="@img64Url" class="img-responsive" alt="website template image" style="width: 500px !important; height: 300px !important"><span></span>
+                                <div class="img_section_txt">@item.City_Name</div>
+                            </a>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>

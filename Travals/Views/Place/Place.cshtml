@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Travals.Models.PlaceModel>
+
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <br />
+    <h2>Place</h2>
+
+    <p>
+        @Html.ActionLink("Add New Place", "Add")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Place_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Place_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Visibile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Place_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Place_Name)
+                </td>
+                <td>
+                    @{
+                        if (item.Visibile == 0)
+                        {
+                            <h4>Private</h4>
+                        }
+                        else
+                        {
+                            <h4>Public</h4>
+                        }
+                    }
+
+                </td>
+                <td>
+                    @{
+                        String img64 = Convert.ToBase64String(item.Image);
+                        String img64Url = string.Format("data:image/" + item.Type + ";base64,{0}", img64);
+                        <img src="@img64Url" alt="Forest" style="height:50px;width:50px;border-radius:10px;">
+                    }
+                </td>
+                @*<td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Place_ID })
+                    </td>*@
+            </tr>
+        }
+
+    </table>
+    <br /> <br /> <br /> <br /> <br /> <br /> <br />
+</div>
